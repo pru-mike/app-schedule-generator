@@ -1,0 +1,92 @@
+=pod
+
+=head1 NAME
+
+schedule.pl - Print duty schedule table
+
+=head1 SYNOPSIS
+
+  schedule.pl -f <from date> -t <to date> -o <op list> --duties <duties> -out <tt|yaml|json|ascii> -h 
+  schedule.pl -in <yaml|json> -out <tt|yaml|json|ascii> < schedule.json
+
+  Options:
+    -f from date
+    -t to date
+    -o comma separated operators list
+    -d duties
+    -out <tt=<template path>|yaml|json>
+    -in <json|yaml>
+    -h help
+
+=head1 OPTIONS
+
+=over 4
+
+=item B<--from|-f>
+
+Schedule start date in format YYYY-MM-DD or 'now', default now
+
+=item B<--to|-t>
+
+Schedule end date in format YYYY-MM-DD or +<num><d|w|m>, default +3weeks
+
+=item B<---operators|-o>
+
+Comma separated duty operators list, eg. -o ivanov,petrov,sidorov
+
+=item B<--duties|-d>
+
+Duties in format duty=days, eg.  -d Support=1,Release=2
+
+=item B<--output|-out>
+
+Choose output format <tt=<template path>|yaml|json>, default -out ascii
+
+=item B<--input|-in>
+
+Read inpout from stdin in format <json|yaml>, insted generation
+
+=item B<--country_code|-cc>
+
+Dtermine holidays via Date::Holidays
+(specific country module must be installed)
+                      
+=item B<--today>
+
+Day to pass to template as 'today' in format YYYY-MM-DD, default today
+
+=item B<-h>
+
+This message
+
+=back
+
+=head1 DESCRIPTION
+
+B<scheduel.pl> is program to to generate and draw duty schedule table in several formats
+
+  $ perl scripts/schedule.pl -o Mike,John,Bob -out ascii -f 2018-08-13 -t +7d -d "support=1,tasks=2"
+
+  .-------------------------------------------------------------------------------.
+  | Month/Day |  Aug/13 |  Aug/14 |  Aug/15 |  Aug/16 |  Aug/17 | Aug/18 | Aug/19 |
+  +-----------+---------+---------+---------+---------+---------+--------+--------+
+  | Mike      | support |         | support |         | tasks   |        |        |
+  | John      | tasks   | tasks   |         | support |         |        |        |
+  | Bob       |         | support | tasks   | tasks   | support |        |        |
+  '-----------+---------+---------+---------+---------+---------+--------+--------'
+
+=head1 AUTHOR
+
+Mike Pruzhanskiy <pru.mike@gmail.com>
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright (c) 2018 Mike Pruzhanskiy <pru.mike@gmail.com>
+
+This is free software; you can redistribute it and/or modify it under the same terms 
+as the Perl 5 programming language system itself.
+
+=head1 SEE ALSO
+
+L<App::Schedule::Generate>
+

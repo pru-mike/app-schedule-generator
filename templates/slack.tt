@@ -1,0 +1,13 @@
+{
+  "attachments": [{
+    "fallback": "Today on duty @[%- op -%]",
+    "color": "warning",
+    "pretext" : "[%-IF link -%]<[%- link -%]|Schedule>[%-END-%]",
+    "fields": [{
+      "title": "[%-IF title -%][%- title -%][%-ELSE-%]Schedule[%-END-%]",
+      "value": "Today on duty <@[%- op -%]>",
+      "short": true
+    }]
+  }]
+}
+

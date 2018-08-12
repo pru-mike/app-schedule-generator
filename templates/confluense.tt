@@ -1,0 +1,15 @@
+[%- FOREACH i IN [0,1,2] -%]
+||[% table.$i.join('||') %]||
+[% END -%]
+[%- table = table.slice(3,-1) -%]
+[%- FOREACH row IN table -%]
+[%- start = 1 -%]
+[%- FOREACH cell IN row -%]
+[%- IF start -%]
+||[%- cell -%]
+[%- start = 0 -%]
+[%- ELSE -%]
+|[%- cell ? cell : ' ' -%]
+[%- END -%]
+[%- END %]|
+[% END -%]

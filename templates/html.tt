@@ -1,0 +1,42 @@
+
+<style>
+table, th, td {
+    border: 1px solid black;
+}
+
+.highlight {
+  background-color:red;
+}
+</style>
+
+<table>
+<tbody>
+
+[%- FOREACH i IN [0,1,2] %]
+<tr>
+[% col_num = 0 %]
+[%- FOREACH j IN table.$i -%]
+<th [%- IF col_num == today_col_num -%]class="highlight"[%- END -%]>[% j %]</th>
+[% col_num = col_num + 1 %]
+[%- END %]
+</tr>
+[%- END -%]
+
+[%- table = table.slice(3,-1) -%]
+[%- FOREACH row IN table -%]
+<tr [%- IF row.0 == operator %]class="highlight"[%-END-%]>
+
+<th>[% row.0 %]</th>
+
+[%- row = row.slice(1,-1) -%]
+[% col_num = 1 %]
+[%- FOREACH cell IN row -%]
+<td [%- IF col_num == today_col_num -%]class="highlight"[%- END -%]>[% cell %]</td>
+[% col_num = col_num + 1 %]
+[%- END %] 
+</tr>
+[% END -%]
+
+</tbody>
+</table>
+
